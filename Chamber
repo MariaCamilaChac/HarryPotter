@@ -1,0 +1,151 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+
+public class ChamberSecrets {
+	
+	public int Value; //global variable
+	
+	public ChamberSecrets next; //pointer
+
+	public ChamberSecrets() {}  //constructor
+
+	public ChamberSecrets(int valor)
+	{
+		this.Value = valor;	
+	}
+
+
+	public String toString() {//show at console
+		
+		return this.Value + "\t";
+	}
+	
+	public static ChamberSecrets head = null; //head equal null
+	
+	public boolean isEmpty() { //check if the Stack is empty
+		
+		return head == null ? true : false;
+	}
+	
+
+
+	public void enquece(ChamberSecrets NewNode) { //put Queue
+		
+		if(isEmpty()) {  // conditional using the method 
+			
+			head = NewNode;	
+			
+		}else{
+			
+			ChamberSecrets temp = head;
+		
+			while(temp.next != null)   //fill the Queue
+			
+				temp = temp.next;
+			
+			temp.next = NewNode;	
+		}
+	}
+	
+	
+	public static int listSize() {//Length of Queue
+		
+		int counter = 0;
+		ChamberSecrets temp = head;
+		
+		while(temp != null)
+		{
+			
+			counter +=1;
+			temp = temp.next;
+			
+		}
+		
+		return counter;		
+	}
+	
+	
+	public static int Testing(ChamberSecrets queue ){ //Testing of numbers than the user index
+		
+		int cont=0;
+		// create variables 
+		ChamberSecrets temp1 = head; 
+		ChamberSecrets temp2 = head.next;
+		
+		for (int j = 0; j <listSize()-1; j++) { // Cycle to go through the Queue
+				
+				if(temp1.Value > temp2.Value){ //conditional to increase the counter 
+					cont++;
+				
+				}else{
+					if(temp1.Value == temp2.Value){ //conditional to increase the counter
+						cont++;
+					}
+					
+				}
+				temp1 = temp1.next; 
+				temp2 = temp2.next;
+		}
+		
+		return cont;
+
+		
+		
+	}
+		
+	
+	public static void main(String[] args) throws IOException {
+			
+	
+		BufferedWriter bw = new BufferedWriter (new OutputStreamWriter(System.out));
+		BufferedReader br = new BufferedReader (new InputStreamReader(System.in));
+
+		ChamberSecrets queue = new ChamberSecrets(); // create the object
+		
+		int counter=0;
+
+		String Num= br.readLine();  // data for the length of Queue
+		int N=Integer.parseInt(Num.split(" ")[0]);
+		int X=Integer.parseInt(Num.split(" ")[1]);
+
+ 
+		
+		try {
+			
+			String array = br.readLine(); // create the String to read the numbers
+			
+			for(int i = 0; i < N; i++) { 
+				
+				queue.enquece(new ChamberSecrets(Integer.parseInt(array.split(" ")[i]))); // fill the queue with the numbers
+			
+		}
+			do{
+				
+				counter = queue.Testing(queue);
+				
+				if (counter==0)  // when the counter not fin any number high than next that means the Queue is in order
+					System.out.println(counter+1);
+				
+				else{
+					
+					if(counter >0) // print the counter plus one
+						System.out.print(counter+1);
+				}
+				
+				break;
+				
+				
+				
+			
+
+			}while(queue.listSize()== dato);
+			
+	}catch  (Exception ex){} 
+	
+	}
+
+
+}
